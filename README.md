@@ -49,21 +49,21 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
 - has_one :address
 
 ## addresses テーブル
 
 | Column        | Type         | Options                        |
 | ------------- | ------------ | ------------------------------ |
-| zip_code      | integer      | null: false                    |
-| prefecture    | string       | null: false                    |
+| zip_code      | string       | null: false                    |
+| prefecture_id | integer      | null: false                    |
 | city          | string       | null: false                    |
 | house_number  | string       | null: false                    |
 | building_name | string       | null: true                     |
-| phone_number  | integer      | null: false                    |
+| phone_number  | string       | null: false                    |
 | order         | references   | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :orders
+- belongs_to :order
