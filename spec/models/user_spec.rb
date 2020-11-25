@@ -35,8 +35,14 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include()
     end
     it "password_confirmationが空欄の場合登録できない" do
+      user = User.new(nickname: "Taro", email: "abcdefghg@mail.com", password: "12345abcdef", password_confirmation: "", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user.valid?
+      expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
     it "password_confirmationがpasswordと一致しない場合登録できない" do
+      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "54321abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user.valid?
+      expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
     it "last_nameが空だと登録できない" do
     end
