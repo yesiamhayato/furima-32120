@@ -75,6 +75,9 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include()
     end
     it "dateが空だと登録できない" do
+      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "")
+      user.valid?
+      expect(user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
