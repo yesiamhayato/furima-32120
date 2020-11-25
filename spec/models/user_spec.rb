@@ -8,12 +8,21 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include("Nickname can't be blank")
     end
     it "emailが空では登録できない" do
+      user = User.new(nickname: "Taro", email: "", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user.valid?
+      expect(user.errors.full_messages).to include("Email can't be blank")
     end
     it "一意性の無いemailは登録できない" do
     end
     it "emailには＠が無いと登録できない" do
+      user = User.new(nickname: "Taro", email: "abcdefghgmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user.valid?
+      expect(user.errors.full_messages).to include("Email is invalid")
     end
     it "passwordが無い場合登録できない" do
+      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user.valid?
+      expect(user.errors.full_messages).to include("Password can't be blank", "Password confirmation doesn't match Password")
     end
     it "passwordは6文字以上無い場合登録できない" do
     end
