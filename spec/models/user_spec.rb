@@ -3,6 +3,9 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
     it "nicknameが空だと登録できない" do
+      user = User.new(nickname: "", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user.valid?
+      expect(user.errors.full_messages).to include("Nickname can't be blank")
     end
     it "emailが空では登録できない" do
     end
