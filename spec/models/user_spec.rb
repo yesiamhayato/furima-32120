@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
       expect(user.errors.full_messages).to include("Email can't be blank")
     end
     it "一意性の無いemailは登録できない" do
+      
     end
     it "emailには＠が無いと登録できない" do
       user = User.new(nickname: "Taro", email: "abcdefghgmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "1990-01-01")
@@ -57,22 +58,22 @@ RSpec.describe User, type: :model do
     it "last_name_kanaが空だと登録できない" do
       user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "", first_name_kana: "タロウ", birthday: "1990-01-01")
       user.valid?
-      expect(user.errors.full_messages).to include("Last name kana can't be blank")
+      expect(user.errors.full_messages).to include("Last name kana can't be blank", "Last name kana is invalid")
     end
     it "first_name_kanaが空だと登録できない" do
       user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "", birthday: "1990-01-01")
       user.valid?
-      expect(user.errors.full_messages).to include("First name kana can't be blank")
+      expect(user.errors.full_messages).to include("First name kana can't be blank", "First name kana is invalid")
     end
     it "last_name_kanaに全角カタカナで入力されていないと登録できない" do
-      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "えんどう", first_name_kana: "タロウ", birthday: "1990-01-01")
+      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "遠藤", first_name_kana: "タロウ", birthday: "1990-01-01")
       user.valid?
-      expect(user.errors.full_messages).to include()
+      expect(user.errors.full_messages).to include("Last name kana is invalid")
     end
     it "first_name_kanaに全角カタカナで入力されていないと登録できない" do
-      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "たろう", birthday: "1990-01-01")
+      user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "太郎", birthday: "1990-01-01")
       user.valid?
-      expect(user.errors.full_messages).to include()
+      expect(user.errors.full_messages).to include("First name kana is invalid")
     end
     it "dateが空だと登録できない" do
       user = User.new(nickname: "Taro", email: "abcdefgh@gmail.com", password: "12345abcdef", password_confirmation: "12345abcdef", last_name: "遠藤", first_name: "太郎", last_name_kana: "エンドウ", first_name_kana: "タロウ", birthday: "")
