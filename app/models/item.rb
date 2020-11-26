@@ -16,10 +16,11 @@ class Item < ApplicationRecord
     end
 
     with_options format: { with: /\A[0-9]+\z/ } do
-      with_options　numerically: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9,999,999 } do
-        validates :price
-      end
+      validates :price
     end
+    #with_options　numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 } do
+      #validates :price
+    #end
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
