@@ -2,13 +2,13 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :item_name
     validates :item_info
-    validates :delivery_fee_id
     validates :shipped_from_fee_id
     validates :until_shipped_id
 
     with_options numericality: { other_than: 1 } do
       validates :category_id
       validates :condition_id
+      validates :delivery_fee_id
     end
 
     with_options format: { with: /\A[0-9]+\z/ } do
@@ -24,5 +24,6 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :condition
+  belongs_to :delivery_fee
 
 end
