@@ -14,14 +14,10 @@ class Item < ApplicationRecord
       validates :shipped_from_id
       validates :until_shipped_id
     end
-
-    with_options format: { with: /\A[0-9]+\z/ } do
-      validates :price
-    end
-    #with_options　numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 } do
-      #validates :price
-    #end
   end
+
+  validates :price, format: { with: /\A[0-9]+\z/ }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
