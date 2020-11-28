@@ -52,7 +52,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price is invalid", "Price is not a number")
       end
       it "priceに半角数字以外が入力されていたら登録できない" do
-        
+        @item.price = "はっぴゃくにじゅう"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
     end
 end
