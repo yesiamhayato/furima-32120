@@ -22,6 +22,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Item info can't be blank")
       end
       it "category_idが1では登録できない" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
       it "condition_idが1では登録できない" do
       end
