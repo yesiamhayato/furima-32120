@@ -3,14 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   with_options presence: true do
     validates :nickname
     validates :email, uniqueness: { case_sensitive: true }
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
     validates :birthday
 
-    with_options format: {with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/} do
+    with_options format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/ } do
       validates :first_name
       validates :last_name
     end
@@ -20,4 +20,6 @@ class User < ApplicationRecord
       validates :first_name_kana
     end
   end
+
+  has_many :items
 end
