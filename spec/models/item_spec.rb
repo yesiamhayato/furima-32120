@@ -58,10 +58,15 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
-      it 'shipped_from_idが1では(空では)登録できない' do
+      it 'shipped_from_idが1では登録できない' do
         @item.shipped_from_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipped from must be other than 1')
+      end
+      it 'shipped_from_idが空では登録できない' do
+        @item.shipped_from_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipped from can't be blank")
       end
       it 'until_shipped_idが1では(空では)登録できない' do
         @item.until_shipped_id = 1
