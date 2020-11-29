@@ -28,20 +28,25 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item info can't be blank")
       end
-      it 'category_idが1では(空では)登録できない' do
+      it 'category_idが1では登録できない' do
         @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it 'category_idが空では登録できない' do
-        @item.category_id = nill
+        @item.category_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
-      it 'condition_idが1では(空では)登録できない' do
+      it 'condition_idが1では登録できない' do
         @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Condition must be other than 1')
+      end
+      it 'condition_idが空では登録できない' do
+        @item.condition_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it 'delivery_feeが1では(空では)登録できない' do
         @item.delivery_fee_id = 1
