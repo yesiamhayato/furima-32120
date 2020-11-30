@@ -126,9 +126,8 @@
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
 
-
+    <% @items.each do |item| %>
       <li class='list'>
-        <% @items.each do |item| %>
           <%= link_to "#" do %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
@@ -172,10 +171,9 @@
               </div>
             </div>
           </div>
-          <% end %>
         </li>
       <% end %>
-    </ul>
+    <% end %>
   </div>
   <%# /商品一覧 %>
 </div>
