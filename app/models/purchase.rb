@@ -1,6 +1,6 @@
 class Purchase
   include ActiveModel::Model
-  attr_accessor :hoge,:fuga...
+  attr_accessor 
 
   # ここにバリデーションの処理を書く
 
