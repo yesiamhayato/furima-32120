@@ -1,10 +1,22 @@
 class Purchase
   include ActiveModel::Model
-  attr_accessor :number, :cvc, :exp_month, :exp_year, :user_id, :item_id, :zip_code, :prefecture_id, :city, :house_number, :building_name, :phone_number
+  attr_accessor :token, :user_id, :item_id, :zip_code, :prefecture_id, :city, :house_number, :building_name, :phone_number
+  with_options presence: true do
+    validates :token
+    validates :user_id
+    validates :item_id
+    validates :zip_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/ }
+    validates :prefecture_id, numericality: { other_than: 1 }
+    validates :city
+    validates :house_number
+    validates :phone_number
+  end
+  validates :price, format: {with: /\A[0-9]+\z/ }
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
-  # ここにバリデーションの処理を書く
 
   def save
-    # 各テーブルにデータを保存する処理を書く
+    order = Order.create(item_id: item_id, user_id: user_id)
+    Address.create(zip_code: zip_code, prefecture_id: prefecture_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number, order_id: order.id)
   end
 end
