@@ -3,12 +3,12 @@ class OrdersController < ApplicationController
   before_action :item_params, only: [:index, :create]
 
   def index
+    
     @purchase = Purchase.new
   end
 
   def create
     @purchase = Purchase.new(purchase_params)
-    #binding.pry
     if @purchase.valid?
       pay_item
       @purchase.save
