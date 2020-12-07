@@ -9,8 +9,12 @@ RSpec.describe Purchase, type: :model do
 
   describe '商品購入機能' do
     it 'すべての値が正しく入力されていれば保存できること' do
+      expect(@purchase).to be_valid
     end
     it 'tokenが無いと保存できない' do
+      @purchase.token = ""
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Token can't be blank")
     end
     it 'zip_codeが空だと保存できない' do
     end
