@@ -27,6 +27,9 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase.errors.full_messages).to include("Zip code is invalid")
     end
     it 'prefecture_idが空だと保存できない' do
+      @purchase.prefecture_id = ""
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
     end
     it 'prefecture_idが1だと保存できない' do
     end
