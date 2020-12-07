@@ -12,6 +12,10 @@ RSpec.describe Purchase, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@purchase).to be_valid
       end
+      it 'building_nameが空でも保存できる' do
+        @purchase.building_name = ''
+        expect(@purchase).to be_valid
+      end
     end
 
     context '異常系' do
