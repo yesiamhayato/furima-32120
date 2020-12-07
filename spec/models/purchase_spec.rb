@@ -51,11 +51,10 @@ RSpec.describe Purchase, type: :model do
       @purchase.valid?
       expect(@purchase.errors.full_messages).to include("Phone number can't be blank")
     end
-    it 'house_numberが空だと保存できない' do
-    end
-    it 'phone_numberが空だと保存できない' do
-    end
     it 'phone_numberが12桁以上だと保存できない' do
+      @purchase.phone_number = "123456789012"
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Phone number is invalid")
     end
     it 'phone_numberが9桁以下だと保存できない' do
     end
