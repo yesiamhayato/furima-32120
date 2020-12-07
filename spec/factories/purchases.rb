@@ -6,7 +6,6 @@ FactoryBot.define do
     city {"夕張市"}
     house_number {"東五反田2-8-5"}
     phone_number {"08022227777"}
-
     association :user
     association :item
   end
