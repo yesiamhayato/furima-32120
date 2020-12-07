@@ -17,8 +17,14 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase.errors.full_messages).to include("Token can't be blank")
     end
     it 'zip_codeが空だと保存できない' do
+      @purchase.zip_code = ""
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Zip code can't be blank")
     end
     it 'zip_codeが半角数字で○○○-○○○○の形でなければ保存できない' do
+      @purchase.zip_code = "2740807"
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Zip code is invalid")
     end
     it 'prefecture_idが空だと保存できない' do
     end
