@@ -47,6 +47,9 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase.errors.full_messages).to include("House number can't be blank")
     end
     it 'phone_numberが空だと保存できない' do
+      @purchase.phone_number = ""
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Phone number can't be blank")
     end
     it 'house_numberが空だと保存できない' do
     end
