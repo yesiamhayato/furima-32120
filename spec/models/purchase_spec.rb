@@ -61,5 +61,10 @@ RSpec.describe Purchase, type: :model do
       @purchase.valid?
       expect(@purchase.errors.full_messages).to include("Phone number is invalid")
     end
+    it 'phone_numberは数字のみでないと保存できない' do
+      @purchase.phone_number = "201a982025"
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Phone number is invalid")
+    end
   end
 end
