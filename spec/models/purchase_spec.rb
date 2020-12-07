@@ -32,6 +32,9 @@ RSpec.describe Purchase, type: :model do
       expect(@purchase.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
     end
     it 'prefecture_idが1だと保存できない' do
+      @purchase.prefecture_id = "1"
+      @purchase.valid?
+      expect(@purchase.errors.full_messages).to include("Prefecture must be other than 1")
     end
     it 'cityが空だと保存できない' do
     end
