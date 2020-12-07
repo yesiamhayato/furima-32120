@@ -5,7 +5,7 @@ FactoryBot.define do
     prefecture_id { '2' }
     city { '夕張市' }
     house_number { '東五反田2-8-5' }
-    building_name { '土浦第一ビル'}
+    building_name { '土浦第一ビル' }
     phone_number { '08022227777' }
     association :user
     association :item
